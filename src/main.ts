@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 (async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const corsOptionsCallback = (req, callback) => {
     const corsOptions = { origin: false, credentials: true };
     if (process.env.CORS_ORIGINS.split(',').includes(req.headers.origin)) {
@@ -13,12 +13,15 @@ import 'dotenv/config';
     }
     callback(null, corsOptions);
   };
-  
-  app.enableCors(corsOptionsCallback)
+
+  app.enableCors(corsOptionsCallback);
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Nibyou Microservice')
-    .setDescription('Microservice Description')
+    .setTitle('Nibyou Mail Microservice')
+    .setDescription(
+      `This is the documentation for the Nibyou Mail Microservice. 
+    It is a microservice that allows you to send emails and letters to your customers.`,
+    )
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);

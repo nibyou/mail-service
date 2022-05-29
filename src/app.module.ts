@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { KeycloakModule } from '@nibyou/keycloak';
 import { EmailModule } from './email/email.module';
-import { SmailModule } from './smail/smail.module';
+import { LetterModule } from './letter/letter.module';
 
 @Module({
-  imports: [KeycloakModule, EmailModule, SmailModule],
+  imports: [KeycloakModule, EmailModule, LetterModule],
   controllers: [AppController],
   providers: [AppService],
 })

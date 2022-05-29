@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { ApiProperty } from '@nestjs/swagger';
 
 const SIBApi = axios.create({
   baseURL: 'https://api.sendinblue.com/v3',
@@ -11,13 +12,35 @@ const SIBApi = axios.create({
   },
 });
 
+class Sender {
+  @ApiProperty()
+  email: string;
+  @ApiProperty()
+  name: string;
+}
+
 export class Email {
-  sender: { name: string; email: string };
-  to: [{ name: string; email: string }];
+  @ApiProperty()
+  sender: Sender;
+  @ApiProperty({
+    type: [Sender],
+  })
+  to: Array<Sender>;
+  @ApiProperty()
   templateId: number;
+  @ApiProperty()
   params: Record<string, string>;
 }
 
-export const sendEmail = async (email: Email) => {
-  return await SIBApi.post('/smtp/email', email);
+export class EmailResponse {
+  @ApiProperty()
+  messageId: string;
+}
+
+export const sendEmail = async (email: Email): Promise<EmailResponse> => {
+  const response = await SIBApi.post<any, AxiosResponse<EmailResponse>>(
+    '/smtp/email',
+    email,
+  );
+  return response.data;
 };

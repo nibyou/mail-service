@@ -1,42 +1,24 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, HttpCode } from '@nestjs/common';
 import { EmailService } from './email.service';
-import { CreateEmailDto } from './dto/create-email.dto';
-import { UpdateEmailDto } from './dto/update-email.dto';
+import { Roles } from 'nest-keycloak-connect';
+import { RealmRoles } from '@nibyou/types';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { Email, EmailResponse } from './helper/sib.helper';
 
+@ApiTags(`email`)
 @Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
   @Post()
-  create(@Body() createEmailDto: CreateEmailDto) {
+  @ApiCreatedResponse({
+    description: 'Sendinblue has successfully sent the email',
+    status: 201,
+    type: EmailResponse,
+  })
+  @HttpCode(201)
+  @Roles({ roles: [RealmRoles.ADMIN, RealmRoles.BACKEND_SERVICE] })
+  create(@Body() createEmailDto: Email) {
     return this.emailService.create(createEmailDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.emailService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.emailService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmailDto: UpdateEmailDto) {
-    return this.emailService.update(+id, updateEmailDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.emailService.remove(+id);
   }
 }
