@@ -20,7 +20,7 @@ import 'dotenv/config';
     .setTitle('Nibyou Mail Microservice')
     .setDescription(
       `This is the documentation for the Nibyou Mail Microservice. 
-    It is a microservice that allows you to send emails and letters to your customers.`,
+    It is a microservice that allows us to send emails and letters to Nibyou customers.`,
     )
     .setVersion('1.0')
     .build();
