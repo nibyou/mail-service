@@ -12,7 +12,7 @@ const SIBApi = axios.create({
   },
 });
 
-class Sender {
+class Recipient {
   @ApiProperty()
   email: string;
   @ApiProperty()
@@ -20,12 +20,10 @@ class Sender {
 }
 
 export class Email {
-  @ApiProperty()
-  sender: Sender;
   @ApiProperty({
-    type: [Sender],
+    type: [Recipient],
   })
-  to: Array<Sender>;
+  to: Array<Recipient>;
   @ApiProperty()
   templateId: number;
   @ApiProperty()
