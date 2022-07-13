@@ -2,10 +2,11 @@ import { Controller, Post, Body, HttpCode } from '@nestjs/common';
 import { EmailService } from './email.service';
 import { Roles } from 'nest-keycloak-connect';
 import { RealmRoles } from '@nibyou/types';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { Email, EmailResponse } from './helper/sib.helper';
 
 @ApiTags(`email`)
+@ApiBearerAuth()
 @Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}

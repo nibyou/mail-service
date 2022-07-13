@@ -10,6 +10,7 @@ import {
 import { LetterService } from './letter.service';
 import { CreateLetterDto } from './dto/create-letter.dto';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -21,6 +22,7 @@ import { RealmRoles } from '@nibyou/types';
 import { BinectDocument } from './helper/binect.helper';
 
 @ApiTags(`letter`)
+@ApiBearerAuth()
 @Controller('letter')
 export class LetterController {
   constructor(private readonly letterService: LetterService) {}
