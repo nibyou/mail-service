@@ -2,9 +2,13 @@ FROM laurenss/texlive-full:latest
 
 WORKDIR /app
 
-RUN apt-get update && curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs npm
-RUN node --version && npm --version
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    npm
+RUN npm install npm@latest -g && \
+    npm install n -g && \
+    n lts
+
 
 COPY package.json .
 COPY yarn.lock .
