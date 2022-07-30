@@ -4,7 +4,7 @@ module.exports = {
       name: 'mail-service',
       script: 'npm',
       args: 'run start:prod',
-      instances: 'max',
+      instances: '1',
       exec_mode: 'cluster',
     },
   ],
