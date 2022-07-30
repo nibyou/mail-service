@@ -3,7 +3,7 @@ FROM laurenss/texlive-full:latest
 WORKDIR /app
 
 RUN apt-get update && curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs npm
 
 COPY package.json .
 COPY yarn.lock .
