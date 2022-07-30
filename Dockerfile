@@ -2,13 +2,12 @@ FROM laurenss/texlive-full:latest
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    npm
-RUN npm install npm@latest -g && \
-    npm install n -g && \
-    n lts
+FROM node:16-alpine AS node
 
+RUN echo "NODE Version:" && node --version
+RUN echo "NPM Version:" && npm --version
+
+COPY --from=node . .
 
 COPY package.json .
 COPY yarn.lock .
