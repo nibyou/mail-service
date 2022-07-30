@@ -20,3 +20,12 @@ export class CreateLetterDto {
   @ApiProperty()
   readonly options: Options;
 }
+
+export class OnboardingLetterDto {
+  @ApiProperty()
+  readonly recoveryPassword: string;
+  @ApiProperty()
+  readonly name: string;
+  @ApiProperty()
+  readonly address: string;
+}

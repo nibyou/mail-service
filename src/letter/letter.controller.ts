@@ -8,13 +8,14 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { LetterService } from './letter.service';
-import { CreateLetterDto } from './dto/create-letter.dto';
+import { CreateLetterDto, OnboardingLetterDto } from './dto/create-letter.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
@@ -37,6 +38,20 @@ export class LetterController {
   @Roles({ roles: [RealmRoles.ADMIN, RealmRoles.BACKEND_SERVICE] })
   create(@Body() createLetterDto: CreateLetterDto) {
     return this.letterService.create(createLetterDto);
+  }
+
+  @Post(`/onboarding-letter`)
+  @ApiCreatedResponse({
+    description: 'Binect has successfully sent the letter',
+    status: 201,
+    type: BinectDocument,
+  })
+  @ApiOperation({
+    description: 'Send an onboarding letter',
+  })
+  @Roles({ roles: [RealmRoles.ADMIN, RealmRoles.BACKEND_SERVICE] })
+  async nibyouLetter(@Body() onboardingLetterDto: OnboardingLetterDto) {
+    return this.letterService.createOnboardingLetter(onboardingLetterDto);
   }
 
   @Get()
