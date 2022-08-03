@@ -11,6 +11,7 @@ import handlebard from 'handlebars';
 import { promises as fs } from 'fs';
 import latex from 'node-latex';
 import { v4 as uuid } from 'uuid';
+import path from 'path';
 
 @Injectable()
 export class LetterService {
@@ -19,8 +20,9 @@ export class LetterService {
   }
 
   async createOnboardingLetter(onboardingLetterDto: OnboardingLetterDto) {
+    console.log('dirname', __dirname);
     const source = await fs.readFile(
-      './helper/latex/onboarding-template.tex',
+      path.join(__dirname, 'helper', 'latex', 'onboarding-template.tex'),
       'utf8',
     );
 
@@ -29,10 +31,16 @@ export class LetterService {
     const result = template(onboardingLetterDto);
 
     const fileUuid = uuid();
-    const uuidFile = `./helper/latex/generated-pdfs/${fileUuid}.tex`;
+    const uuidFile = path.join(
+      __dirname,
+      'helper',
+      'latex',
+      'generated-pdfs',
+      fileUuid + '.tex',
+    );
 
     const pdf = latex(result, {
-      inputs: ['./latex'],
+      inputs: [path.join(__dirname, 'helper', 'latex')],
     });
 
     await fs.writeFile(uuidFile, pdf);
