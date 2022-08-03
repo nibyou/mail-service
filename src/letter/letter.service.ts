@@ -7,11 +7,11 @@ import {
   sendLetter,
 } from './helper/binect.helper';
 import { Document } from 'binect';
-import handlebard from 'handlebars';
+import handlebars from 'handlebars';
 import { promises as fs } from 'fs';
 import latex from 'node-latex';
 import { v4 as uuid } from 'uuid';
-import path from 'path';
+import * as path from 'path';
 
 @Injectable()
 export class LetterService {
@@ -26,7 +26,7 @@ export class LetterService {
       'utf8',
     );
 
-    const template = handlebard.compile(source);
+    const template = handlebars.compile(source);
 
     const result = template(onboardingLetterDto);
 
