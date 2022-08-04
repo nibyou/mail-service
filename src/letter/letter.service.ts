@@ -8,10 +8,11 @@ import {
 } from './helper/binect.helper';
 import { Document } from 'binect';
 import handlebars from 'handlebars';
-import { promises as fs } from 'fs';
+import { createWriteStream, promises as fs } from 'fs';
 import latex from '@nibyou/latex';
 import { v4 as uuid } from 'uuid';
 import * as path from 'path';
+import { Transform } from 'stream';
 
 @Injectable()
 export class LetterService {
@@ -43,7 +44,7 @@ export class LetterService {
       inputs: [path.join(__dirname, 'helper', 'latex')],
     });
 
-    await fs.writeFile(uuidFile, pdf);
+    await writeFileStream(uuidFile, pdf);
 
     const pdfString = await fs.readFile(uuidFile, 'utf8');
 
@@ -72,4 +73,17 @@ export class LetterService {
   async remove(id: number): Promise<void> {
     await deleteSending(id);
   }
+}
+
+function writeFileStream(fileName: string, content: Transform) {
+  return new Promise<void>((resolve, reject) => {
+    const str = createWriteStream(fileName);
+    content.pipe(str);
+    content.on('error', (err) => {
+      reject(err);
+    });
+    content.on('finish', () => {
+      resolve();
+    });
+  });
 }
