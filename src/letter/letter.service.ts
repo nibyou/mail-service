@@ -9,7 +9,7 @@ import {
 import { Document } from 'binect';
 import handlebars from 'handlebars';
 import { promises as fs } from 'fs';
-import latex from 'node-latex';
+import latex from '@nibyou/latex';
 import { v4 as uuid } from 'uuid';
 import * as path from 'path';
 

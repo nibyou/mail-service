@@ -676,6 +676,17 @@
     keycloak-connect "^15.1.1"
     nest-keycloak-connect "^1.8.3"
 
+"@nibyou/latex@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@nibyou/latex/-/latex-3.1.0.tgz#01f021a2ad5dffe909865fc9d1e5466a3925974a"
+  integrity sha512-4AX+1vF+c7Xko6U+5Rtk3fPhEe3BNNqPGrrOzMmhBbAQmbaLSayc5DRkHFf9atQ50yIEepky0CAMsug3FLNJ3g==
+  dependencies:
+    "@types/node" "^11.12.0"
+    fs-extra "^2.0.0"
+    string-to-stream "^1.1.0"
+    temp "^0.8.3"
+    through2 "^2.0.3"
+
 "@nibyou/types@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@nibyou/types/-/types-1.4.0.tgz#f46cd86379a3b431ff5be8fc468516893fcc8ad8"
@@ -4222,17 +4233,6 @@ node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/node-int64/-/node-int64-0.4.0.tgz"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
-
-node-latex@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/node-latex/-/node-latex-3.1.0.tgz#7e5173321fc434f1e5e5a2b9aee7b740a0a06594"
-  integrity sha512-9Enrc0bhYQREo/rjhLVYjEi0aHoCIS6gNQUIywJm2GwaXff8m4qeL55o5W0agYGZYOh2liJ2Zyguavyc2LUkOg==
-  dependencies:
-    "@types/node" "^11.12.0"
-    fs-extra "^2.0.0"
-    string-to-stream "^1.1.0"
-    temp "^0.8.3"
-    through2 "^2.0.3"
 
 node-releases@^2.0.2:
   version "2.0.3"
