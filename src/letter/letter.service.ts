@@ -37,7 +37,7 @@ export class LetterService {
       'helper',
       'latex',
       'generated-pdfs',
-      fileUuid + '.tex',
+      fileUuid + '.pdf',
     );
 
     const pdf = latex(result, {
@@ -58,6 +58,8 @@ export class LetterService {
         color: true,
       },
     };
+
+    //await fs.unlink(uuidFile);
 
     await sendLetter(createLetterDto);
   }
