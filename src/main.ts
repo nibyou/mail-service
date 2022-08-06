@@ -2,11 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import 'dotenv/config';
+import { json } from 'body-parser';
 
 (async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
+  app.use(json({ limit: '100mb' }));
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Nibyou Mail Microservice')
