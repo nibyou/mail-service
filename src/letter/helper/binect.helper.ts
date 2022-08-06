@@ -25,6 +25,7 @@ export const sendLetter = async (
 ): Promise<Document> => {
   console.log('letter', letter);
   const result = await sendingApi.sendDocument(letter);
+  console.log(result, result.data);
   return result.data;
 };
 

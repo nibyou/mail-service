@@ -46,7 +46,7 @@ export class LetterService {
 
     await writeFileStream(uuidFile, pdf);
 
-    const pdfString = await fs.readFile(uuidFile, 'utf8');
+    const pdfString = await fs.readFile(uuidFile, { encoding: 'base64' });
 
     const createLetterDto: CreateLetterDto = {
       content: {
