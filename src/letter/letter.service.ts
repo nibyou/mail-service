@@ -46,7 +46,8 @@ export class LetterService {
 
     await writeFileStream(uuidFile, pdf);
 
-    const pdfString = await fs.readFile(uuidFile, { encoding: 'base64' });
+    const pdfBuffer = await fs.readFile(uuidFile);
+    const pdfString = pdfBuffer.toString('base64');
 
     const createLetterDto: CreateLetterDto = {
       content: {
@@ -59,7 +60,7 @@ export class LetterService {
       },
     };
 
-    //await fs.unlink(uuidFile);
+    await fs.unlink(uuidFile);
 
     await sendLetter(createLetterDto);
   }
