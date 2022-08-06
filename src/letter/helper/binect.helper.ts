@@ -23,6 +23,7 @@ const sendingApi = new SendingsApi(configuration);
 export const sendLetter = async (
   letter: SendDocumentRequest,
 ): Promise<Document> => {
+  console.log('letter', letter);
   const result = await sendingApi.sendDocument(letter);
   return result.data;
 };
