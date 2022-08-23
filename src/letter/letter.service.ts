@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateLetterDto, OnboardingLetterDto } from './dto/create-letter.dto';
 import {
   deleteSending,
@@ -62,7 +62,11 @@ export class LetterService {
 
     await fs.unlink(uuidFile);
 
-    await sendLetter(createLetterDto);
+    const letterRes = await sendLetter(createLetterDto);
+    if (letterRes.letter.letterType.toLowerCase() === 'error') {
+      console.log('errors: ', letterRes.letter.errors);
+      throw new HttpException({ error: letterRes.letter.errors }, 500);
+    }
   }
 
   async findAll(): Promise<Document[]> {
