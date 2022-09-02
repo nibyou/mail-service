@@ -42,3 +42,28 @@ export const sendEmail = async (email: Email): Promise<EmailResponse> => {
   );
   return response.data;
 };
+
+export class Contact {
+  @ApiProperty()
+  email: string;
+  @ApiProperty({
+    type: [Number],
+  })
+  listIds: number[];
+}
+
+export class ContactResponse {
+  @ApiProperty()
+  id: string;
+}
+
+export const addContact = async (
+  contact: Contact,
+): Promise<ContactResponse> => {
+  const response = await SIBApi.post<any, AxiosResponse<ContactResponse>>(
+    '/contacts',
+    contact,
+  );
+
+  return response.data;
+};
