@@ -5,7 +5,7 @@ module.exports = {
       script: 'npm',
       args: 'run start:prod',
       instances: '1',
-      exec_mode: 'cluster',
+      exec_mode: 'fork',
     },
   ],
 };
